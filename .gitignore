@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local db
 pocketbase.exe
+/src/generated/prisma
