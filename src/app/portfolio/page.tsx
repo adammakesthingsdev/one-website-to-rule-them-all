@@ -1,23 +1,21 @@
 /**
- * Portfolio page
+ * Portfolio listing page
  */
+import {
+    portfolioData,
+    type PortfolioDataItem,
+} from "@/content/portfolio-data";
 import { PortfolioItem } from "@/ui/portfolio";
-import { PortfolioItemHandler } from "@/ui/portfolioHandler";
-import { type PortfolioTag, PrismaClient } from "@prisma/client";
-import Image from "next/image";
 
-const prisma = new PrismaClient();
-
-export default async function PortfolioPage() {
-    const items = await prisma.portfolioItem.findMany({
-        include: { tag: true },
-        orderBy: { date: "desc" },
-    });
+export default function PortfolioPage() {
     return (
-        <div className="lg:mx-80">
-            {items.map((item) => (
-                <PortfolioItemHandler item={item} key={item.id} />
-            ))}
+        <div className="w-full flex flex-col items-center grow">
+            <div className="flex flex-col lg:w-1/2 p-3 bg-purple-50 grow items-center">
+                <h1 className="text-2xl">Project portfolio</h1>
+                {portfolioData.map((item) => (
+                    <PortfolioItem item={item} key={item.title} />
+                ))}
+            </div>
         </div>
     );
 }
